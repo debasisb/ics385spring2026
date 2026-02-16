@@ -22,3 +22,7 @@ This is the main page for Course ICS 385 Spring 2026
   - My-Express-Server
   - BMI Calculator
   - Secrets Project
+
+## Week 6 - EJS
+  - To Do List
+  - Random Band Calculator
