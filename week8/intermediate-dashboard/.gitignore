@@ -1,0 +1,9 @@
+# Never commit real credentials
+.env
+
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/settings.json

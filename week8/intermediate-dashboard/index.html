@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UH Maui College – Campus Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="dashboard-header">
+  <div class="header-content">
+    <div class="header-brand">
+      <span class="brand-icon">🌺</span>
+      <div>
+        <h1>UH Maui College Campus Dashboard</h1>
+        <p class="header-subtitle">Spring 2026 · ICS 385 Week 8 Intermediate</p>
+      </div>
+    </div>
+    <div class="header-controls">
+      <button id="settingsBtn" class="header-btn" aria-label="API Settings">⚙ Settings</button>
+      <button id="refreshAllBtn" class="header-btn primary" aria-label="Refresh all data">↻ Refresh All</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== MAIN DASHBOARD ===================== -->
+<main id="dashboard-container" class="dashboard-grid">
+
+  <!-- Quick Stats -->
+  <section class="stats-overview" aria-label="Quick statistics">
+    <div class="stat-card">
+      <span class="stat-number" id="total-courses">–</span>
+      <span class="stat-label">Courses</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" id="total-students">–</span>
+      <span class="stat-label">Students</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" id="avg-capacity">–</span>
+      <span class="stat-label">Avg Capacity</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" id="api-status">–</span>
+      <span class="stat-label">Weather API</span>
+    </div>
+  </section>
+
+  <!-- Weather Widget -->
+  <section id="weather-widget" class="dashboard-widget weather-widget" aria-label="Campus weather">
+    <div class="loading">
+      <span class="spinner"></span> Loading weather…
+    </div>
+  </section>
+
+  <!-- Humor Widget -->
+  <section id="humor-widget" class="dashboard-widget humor-widget" aria-label="Campus humor">
+    <div class="loading">
+      <span class="spinner"></span> Loading jokes…
+    </div>
+  </section>
+
+  <!-- Course Management Widget -->
+  <section class="dashboard-widget course-widget" aria-label="Course management">
+    <div class="widget-header">
+      <h3>Course Management</h3>
+      <div class="widget-controls">
+        <input type="search" id="courseSearch" placeholder="Search courses…" aria-label="Search courses">
+        <select id="departmentFilter" aria-label="Filter by department">
+          <option value="all">All Departments</option>
+        </select>
+        <select id="creditsFilter" aria-label="Filter by credits">
+          <option value="all">All Credits</option>
+          <option value="1">1 Credit</option>
+          <option value="2">2 Credits</option>
+          <option value="3">3 Credits</option>
+          <option value="4">4 Credits</option>
+        </select>
+      </div>
+    </div>
+    <div id="coursesContainer" class="courses-grid">
+      <div class="loading"><span class="spinner"></span> Loading courses…</div>
+    </div>
+  </section>
+
+  <!-- Quick Actions -->
+  <section class="dashboard-widget actions-widget" aria-label="Quick actions">
+    <div class="widget-header">
+      <h3>Quick Actions</h3>
+    </div>
+    <div class="actions-grid">
+      <button class="action-btn" onclick="dashboard.addNewCourse()">
+        <span class="action-icon">➕</span>
+        <span>Add Course</span>
+      </button>
+      <button class="action-btn" onclick="dashboard.exportData()">
+        <span class="action-icon">⬇</span>
+        <span>Export JSON</span>
+      </button>
+      <button class="action-btn" onclick="dashboard.refreshWeather()">
+        <span class="action-icon">🌤</span>
+        <span>Update Weather</span>
+      </button>
+      <button class="action-btn" onclick="dashboard.refreshHumor()">
+        <span class="action-icon">😄</span>
+        <span>New Jokes</span>
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="dashboard-footer">
+  <p>ICS 385 · Week 8 Intermediate – Multi-API Dashboard · Dr. Debasis Bhattacharya · UH Maui College</p>
+</footer>
+
+<!-- ===================== LOADING OVERLAY ===================== -->
+<div id="loadingOverlay" class="loading-overlay" aria-live="polite">
+  <div class="loading-spinner">
+    <span class="spinner large"></span>
+    <p>Initializing dashboard…</p>
+  </div>
+</div>
+
+<!-- ===================== API KEY MODAL ===================== -->
+<div id="apiKeyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="apiKeyModalTitle">
+  <div class="modal-content">
+    <h2 id="apiKeyModalTitle">API Configuration</h2>
+    <p>Enter your API keys to enable live weather and Chuck Norris data.
+       Keys are stored only in your browser's localStorage – never sent to any server.</p>
+
+    <div class="api-key-setup">
+      <label for="openWeatherKey">
+        OpenWeatherMap API Key
+        <a href="https://openweathermap.org/api" target="_blank" rel="noopener">(get free key)</a>
+      </label>
+      <input type="password" id="openWeatherKey"
+             placeholder="e.g. a1b2c3d4e5f6…"
+             autocomplete="off">
+
+      <label for="rapidApiKey">
+        RapidAPI Key – Chuck Norris
+        <a href="https://rapidapi.com/matchilling/api/chuck-norris" target="_blank" rel="noopener">(subscribe free)</a>
+      </label>
+      <input type="password" id="rapidApiKey"
+             placeholder="e.g. x9y8z7…"
+             autocomplete="off">
+
+      <p id="apiKeyError" class="error-message" style="display:none"></p>
+
+      <div class="modal-actions">
+        <button class="save-btn" onclick="dashboard.saveApiKeys()">Save Keys</button>
+        <button class="skip-btn"
+                onclick="document.getElementById('apiKeyModal').style.display='none'">
+          Skip – use fallback data
+        </button>
+      </div>
+
+      <p class="key-note">
+        ℹ JokeAPI (programming jokes) requires no key and works automatically.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ADD COURSE MODAL ===================== -->
+<div id="addCourseModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="addCourseTitle">
+  <div class="modal-content">
+    <h2 id="addCourseTitle">Add New Course</h2>
+    <form id="addCourseForm" onsubmit="event.preventDefault(); dashboard.submitNewCourse()">
+      <div class="form-grid">
+        <label>
+          Course Code *
+          <input type="text" id="newCourseCode" placeholder="e.g. ICS 490" required>
+        </label>
+        <label>
+          Department *
+          <select id="newCourseDept" required>
+            <option value="ICS">ICS</option>
+            <option value="MATH">MATH</option>
+            <option value="ENG">ENG</option>
+          </select>
+        </label>
+        <label class="full-width">
+          Title *
+          <input type="text" id="newCourseTitle" placeholder="Course title" required>
+        </label>
+        <label>
+          Credits *
+          <input type="number" id="newCourseCredits" min="1" max="6" value="3" required>
+        </label>
+        <label>
+          Instructor *
+          <input type="text" id="newCourseInstructor" placeholder="Dr. Name" required>
+        </label>
+        <label class="full-width">
+          Description
+          <textarea id="newCourseDesc" rows="3" placeholder="Brief course description"></textarea>
+        </label>
+      </div>
+
+      <p id="addCourseError" class="error-message" style="display:none"></p>
+
+      <div class="modal-actions">
+        <button type="submit" class="save-btn">Add Course</button>
+        <button type="button" class="skip-btn"
+                onclick="document.getElementById('addCourseModal').style.display='none'">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script src="config.js"></script>
+<script src="api-client.js"></script>
+<script src="course-catalog.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>
