@@ -1,0 +1,260 @@
+{
+  "university": "University of Hawaii Maui College",
+  "semester": "Spring 2026",
+  "lastUpdated": "2026-03-03",
+  "departments": [
+    {
+      "code": "ICS",
+      "name": "Information and Computer Sciences",
+      "chair": "Dr. Jane Smith",
+      "courses": [
+        {
+          "courseCode": "ICS 110",
+          "title": "Introduction to Computer Science",
+          "credits": 3,
+          "description": "Introduction to fundamental concepts of computer science including problem solving, algorithms, and basic programming principles.",
+          "prerequisites": [],
+          "instructor": {
+            "name": "Dr. Jane Smith",
+            "email": "janesmith@hawaii.edu",
+            "office": "Kaaike 110"
+          },
+          "schedule": {
+            "days": ["Monday", "Wednesday"],
+            "time": "9:00 AM - 10:15 AM",
+            "location": "Kaaike 101",
+            "capacity": 30,
+            "enrolled": 28
+          },
+          "isActive": true,
+          "topics": ["Algorithms", "Problem Solving", "Python Basics", "Logic"],
+          "assignments": [
+            { "name": "Lab 1 - Hello World", "points": 5, "dueDate": "2026-01-20" },
+            { "name": "Lab 2 - Variables", "points": 10, "dueDate": "2026-01-27" }
+          ]
+        },
+        {
+          "courseCode": "ICS 211",
+          "title": "Introduction to Computer Science II",
+          "credits": 3,
+          "description": "Data structures and algorithms: lists, stacks, queues, trees, sorting and searching algorithms.",
+          "prerequisites": ["ICS 110"],
+          "instructor": {
+            "name": "Prof. Alan Nakamura",
+            "email": "alann@hawaii.edu",
+            "office": "Kaaike 112"
+          },
+          "schedule": {
+            "days": ["Tuesday", "Thursday"],
+            "time": "11:00 AM - 12:15 PM",
+            "location": "Kaaike 102",
+            "capacity": 25,
+            "enrolled": 20
+          },
+          "isActive": true,
+          "topics": ["Data Structures", "Sorting", "Recursion", "Trees", "Linked Lists"],
+          "assignments": [
+            { "name": "Project 1 - Linked List", "points": 20, "dueDate": "2026-02-10" },
+            { "name": "Midterm", "points": 100, "dueDate": "2026-03-12" }
+          ]
+        },
+        {
+          "courseCode": "ICS 320",
+          "title": "Database Systems",
+          "credits": 3,
+          "description": "Design and use of relational database management systems. SQL, normalization, ER modeling, and database administration.",
+          "prerequisites": ["ICS 211"],
+          "instructor": {
+            "name": "Dr. Maria Santos",
+            "email": "marias@hawaii.edu",
+            "office": "Kaaike 116"
+          },
+          "schedule": {
+            "days": ["Monday", "Wednesday", "Friday"],
+            "time": "1:00 PM - 1:50 PM",
+            "location": "Kaaike 103",
+            "capacity": 20,
+            "enrolled": 15
+          },
+          "isActive": true,
+          "topics": ["SQL", "Normalization", "ER Diagrams", "PostgreSQL", "Transactions"],
+          "assignments": [
+            { "name": "HW 1 - SQL Queries", "points": 15, "dueDate": "2026-02-03" },
+            { "name": "Database Design Project", "points": 50, "dueDate": "2026-04-15" }
+          ]
+        },
+        {
+          "courseCode": "ICS 385",
+          "title": "Web Development and Administration",
+          "credits": 3,
+          "description": "Detailed knowledge of web page authoring and server-side programming using HTML, CSS, JavaScript, and Node.js.",
+          "prerequisites": ["ICS 320"],
+          "instructor": {
+            "name": "Dr. Debasis Bhattacharya",
+            "email": "debasisb@hawaii.edu",
+            "office": "Kaaike 114"
+          },
+          "schedule": {
+            "days": ["Tuesday"],
+            "time": "4:30 PM - 5:45 PM",
+            "location": "Online (Zoom)",
+            "capacity": 25,
+            "enrolled": 18
+          },
+          "isActive": true,
+          "topics": ["HTML", "CSS", "JavaScript", "Node.js", "APIs", "React"],
+          "assignments": [
+            { "name": "Week 1 - Setup", "points": 1, "dueDate": "2026-01-19" },
+            { "name": "Week 2 - HTML/CSS", "points": 3, "dueDate": "2026-01-26" },
+            { "name": "Week 8 - JSON", "points": 1, "dueDate": "2026-03-05" }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MATH",
+      "name": "Mathematics",
+      "chair": "Dr. Robert Johnson",
+      "courses": [
+        {
+          "courseCode": "MATH 100",
+          "title": "Survey of Mathematics",
+          "credits": 3,
+          "description": "Topics from contemporary mathematics including logic, sets, numeration systems, statistics, and financial mathematics.",
+          "prerequisites": [],
+          "instructor": {
+            "name": "Prof. Lisa Chang",
+            "email": "lisac@hawaii.edu",
+            "office": "Academic Center 105"
+          },
+          "schedule": {
+            "days": ["Monday", "Wednesday", "Friday"],
+            "time": "8:00 AM - 8:50 AM",
+            "location": "AC 101",
+            "capacity": 35,
+            "enrolled": 32
+          },
+          "isActive": true,
+          "topics": ["Logic", "Sets", "Statistics", "Financial Math", "Probability"],
+          "assignments": [
+            { "name": "Quiz 1", "points": 20, "dueDate": "2026-01-30" },
+            { "name": "Midterm Exam", "points": 100, "dueDate": "2026-03-06" }
+          ]
+        },
+        {
+          "courseCode": "MATH 135",
+          "title": "Pre-Calculus",
+          "credits": 3,
+          "description": "Algebraic and transcendental functions, analytic geometry, systems of equations, matrices, sequences, and series.",
+          "prerequisites": ["MATH 100"],
+          "instructor": {
+            "name": "Dr. Robert Johnson",
+            "email": "robertj@hawaii.edu",
+            "office": "Academic Center 200"
+          },
+          "schedule": {
+            "days": ["Tuesday", "Thursday"],
+            "time": "9:00 AM - 10:15 AM",
+            "location": "AC 103",
+            "capacity": 30,
+            "enrolled": 22
+          },
+          "isActive": true,
+          "topics": ["Functions", "Trigonometry", "Matrices", "Sequences", "Analytic Geometry"],
+          "assignments": [
+            { "name": "Homework Set 1", "points": 15, "dueDate": "2026-01-28" },
+            { "name": "Midterm Exam", "points": 100, "dueDate": "2026-03-10" }
+          ]
+        },
+        {
+          "courseCode": "MATH 140",
+          "title": "Calculus I",
+          "credits": 4,
+          "description": "Limits, derivatives, applications of derivatives, introduction to integration.",
+          "prerequisites": ["MATH 135"],
+          "instructor": {
+            "name": "Dr. Sarah Wilson",
+            "email": "sarahw@hawaii.edu",
+            "office": "Academic Center 201"
+          },
+          "schedule": {
+            "days": ["Monday", "Wednesday", "Friday"],
+            "time": "10:00 AM - 10:50 AM",
+            "location": "AC 105",
+            "capacity": 30,
+            "enrolled": 25
+          },
+          "isActive": true,
+          "topics": ["Limits", "Derivatives", "Integration", "Applications"],
+          "assignments": [
+            { "name": "Homework 1", "points": 10, "dueDate": "2026-01-20" },
+            { "name": "Midterm Exam", "points": 100, "dueDate": "2026-03-15" }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "ENG",
+      "name": "English",
+      "chair": "Dr. Kalani Akana",
+      "courses": [
+        {
+          "courseCode": "ENG 100",
+          "title": "Composition I",
+          "credits": 3,
+          "description": "Development of expository and argumentative writing skills. Emphasis on the writing process, critical thinking, and research strategies.",
+          "prerequisites": [],
+          "instructor": {
+            "name": "Dr. Kalani Akana",
+            "email": "kalania@hawaii.edu",
+            "office": "Laulima 201"
+          },
+          "schedule": {
+            "days": ["Monday", "Wednesday"],
+            "time": "11:00 AM - 12:15 PM",
+            "location": "Laulima 105",
+            "capacity": 22,
+            "enrolled": 20
+          },
+          "isActive": true,
+          "topics": ["Essay Writing", "Research", "Critical Thinking", "MLA Format", "Argumentation"],
+          "assignments": [
+            { "name": "Essay 1 - Narrative", "points": 25, "dueDate": "2026-02-06" },
+            { "name": "Research Paper", "points": 100, "dueDate": "2026-04-24" }
+          ]
+        },
+        {
+          "courseCode": "ENG 200",
+          "title": "Composition II",
+          "credits": 3,
+          "description": "Advanced composition with emphasis on research writing, literary analysis, and argumentation across disciplines.",
+          "prerequisites": ["ENG 100"],
+          "instructor": {
+            "name": "Prof. Mele Kahananui",
+            "email": "melek@hawaii.edu",
+            "office": "Laulima 203"
+          },
+          "schedule": {
+            "days": ["Tuesday", "Thursday"],
+            "time": "1:30 PM - 2:45 PM",
+            "location": "Laulima 106",
+            "capacity": 22,
+            "enrolled": 14
+          },
+          "isActive": true,
+          "topics": ["Literary Analysis", "Advanced Research", "APA Format", "Peer Review", "Academic Writing"],
+          "assignments": [
+            { "name": "Analysis Essay", "points": 30, "dueDate": "2026-02-20" },
+            { "name": "Final Research Paper", "points": 150, "dueDate": "2026-05-01" }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "totalCourses": 9,
+    "totalDepartments": 3,
+    "totalCreditsOffered": 28,
+    "academicYear": "2025-2026"
+  }
+}

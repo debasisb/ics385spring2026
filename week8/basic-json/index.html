@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UH Maui College - Course Catalog</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1>UH Maui College Course Catalog</h1>
+      <p>Spring 2026 &mdash; Interactive Course Browser</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Controls: Search, Filters, Actions -->
+    <section class="controls" aria-label="Search and filter controls">
+
+      <div class="search-section">
+        <label for="searchInput" class="sr-only">Search courses</label>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search courses, instructors, topics..."
+          aria-label="Search courses by code, title, instructor, or topic"
+        >
+        <button id="clearSearchBtn" aria-label="Clear search">Clear</button>
+      </div>
+
+      <div class="filter-section">
+        <label for="departmentFilter" class="sr-only">Filter by department</label>
+        <select id="departmentFilter" aria-label="Filter by department">
+          <option value="all">All Departments</option>
+          <option value="ICS">Computer Science (ICS)</option>
+          <option value="MATH">Mathematics (MATH)</option>
+          <option value="ENG">English (ENG)</option>
+        </select>
+
+        <label for="creditsFilter" class="sr-only">Filter by credit hours</label>
+        <select id="creditsFilter" aria-label="Filter by credit hours">
+          <option value="all">All Credit Hours</option>
+          <option value="1">1 Credit</option>
+          <option value="2">2 Credits</option>
+          <option value="3">3 Credits</option>
+          <option value="4">4 Credits</option>
+        </select>
+      </div>
+
+      <div class="action-section">
+        <button id="loadSampleBtn">Load Sample Data</button>
+        <button id="addCourseBtn">+ Add New Course</button>
+        <button id="exportBtn">Export JSON</button>
+      </div>
+
+    </section>
+
+    <!-- Notification area for success/error messages -->
+    <div id="notificationArea" role="alert" aria-live="polite"></div>
+
+    <!-- Statistics Dashboard -->
+    <section id="statisticsSection" class="statistics" aria-label="Catalog statistics">
+      <div class="stat-item">
+        <span class="stat-number" id="totalCourses">0</span>
+        <span class="stat-label">Total Courses</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="totalDepartments">0</span>
+        <span class="stat-label">Departments</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="averageEnrollment">0%</span>
+        <span class="stat-label">Avg Enrollment</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="displayedCourses">0</span>
+        <span class="stat-label">Showing</span>
+      </div>
+    </section>
+
+    <!-- Course Cards Grid -->
+    <section id="coursesContainer" class="courses-grid" aria-label="Course listings">
+      <div class="loading">Loading course catalog...</div>
+    </section>
+
+  </main>
+
+  <!-- Course Details Modal -->
+  <div id="courseModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
+      <div id="modalBody">
+        <!-- Course details dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Add New Course Modal -->
+  <div id="addCourseModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="addModalTitle">
+    <div class="modal-content modal-form">
+      <button class="close-btn" id="closeAddModalBtn" aria-label="Close form">&times;</button>
+      <h2 id="addModalTitle">Add New Course</h2>
+
+      <form id="addCourseForm" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="newCourseCode">Course Code <span class="required">*</span></label>
+            <input type="text" id="newCourseCode" placeholder="e.g. ICS 490" required>
+            <span class="field-error" id="errCourseCode"></span>
+          </div>
+          <div class="form-group">
+            <label for="newCredits">Credits <span class="required">*</span></label>
+            <input type="number" id="newCredits" min="1" max="6" placeholder="1-6" required>
+            <span class="field-error" id="errCredits"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="newTitle">Course Title <span class="required">*</span></label>
+          <input type="text" id="newTitle" placeholder="Course title" required>
+          <span class="field-error" id="errTitle"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="newDescription">Description <span class="required">*</span></label>
+          <textarea id="newDescription" rows="3" placeholder="Course description" required></textarea>
+          <span class="field-error" id="errDescription"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="newDepartment">Department <span class="required">*</span></label>
+          <select id="newDepartment" required>
+            <option value="">Select a department</option>
+            <option value="ICS">Information and Computer Sciences (ICS)</option>
+            <option value="MATH">Mathematics (MATH)</option>
+            <option value="ENG">English (ENG)</option>
+          </select>
+          <span class="field-error" id="errDepartment"></span>
+        </div>
+
+        <fieldset class="form-fieldset">
+          <legend>Instructor</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newInstructorName">Name <span class="required">*</span></label>
+              <input type="text" id="newInstructorName" placeholder="Dr. First Last" required>
+              <span class="field-error" id="errInstructorName"></span>
+            </div>
+            <div class="form-group">
+              <label for="newInstructorEmail">Email <span class="required">*</span></label>
+              <input type="email" id="newInstructorEmail" placeholder="name@hawaii.edu" required>
+              <span class="field-error" id="errInstructorEmail"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newInstructorOffice">Office</label>
+            <input type="text" id="newInstructorOffice" placeholder="Building and room">
+          </div>
+        </fieldset>
+
+        <fieldset class="form-fieldset">
+          <legend>Schedule</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newScheduleDays">Days (comma-separated) <span class="required">*</span></label>
+              <input type="text" id="newScheduleDays" placeholder="Monday, Wednesday" required>
+              <span class="field-error" id="errScheduleDays"></span>
+            </div>
+            <div class="form-group">
+              <label for="newScheduleTime">Time <span class="required">*</span></label>
+              <input type="text" id="newScheduleTime" placeholder="9:00 AM - 10:15 AM" required>
+              <span class="field-error" id="errScheduleTime"></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newLocation">Location</label>
+              <input type="text" id="newLocation" placeholder="Building Room or Online">
+            </div>
+            <div class="form-group">
+              <label for="newCapacity">Capacity <span class="required">*</span></label>
+              <input type="number" id="newCapacity" min="1" placeholder="Max students" required>
+              <span class="field-error" id="errCapacity"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-group">
+          <label for="newTopics">Topics (comma-separated) <span class="required">*</span></label>
+          <input type="text" id="newTopics" placeholder="HTML, CSS, JavaScript" required>
+          <span class="field-error" id="errTopics"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="newPrerequisites">Prerequisites (comma-separated)</label>
+          <input type="text" id="newPrerequisites" placeholder="e.g. ICS 211, MATH 100">
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancelAddBtn">Cancel</button>
+          <button type="submit" class="btn-primary">Add Course</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>ICS 385 Week 8 &mdash; JSON Fundamentals Assignment &nbsp;|&nbsp; University of Hawaii Maui College</p>
+  </footer>
+
+  <script src="course-catalog.js"></script>
+</body>
+</html>
