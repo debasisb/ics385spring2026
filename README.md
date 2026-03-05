@@ -26,3 +26,7 @@ This is the main page for Course ICS 385 Spring 2026
 ## Week 6 - EJS
   - To Do List
   - Random Band Calculator
+
+## Week 8 - JSON and APIs
+  - Basic JSON
+  - Dashboard with JSON and APIs
